@@ -1,6 +1,6 @@
-1/20/FET/BCS/139
-Siddharth Singh
+1/20/FET/BCS/202
+Aman Negi
 FET
-siddhussingh@gmail.com
-siddahrthparent@gmail.com
-siddharthmentor@gmail.com
+9900arya@gmail.com
+9900arya@gmail.com
+boy298011@gmail.com

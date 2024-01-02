@@ -1,26 +1,42 @@
-import cv2
-from deepface import DeepFace as df
-img1=cv2.imread(".\\1_20_FET_BCS_139.png")
-img2=cv2.imread(".\\1_20_FET_BCS_139.png")
-result=df.verify(img1,img2)
-print (result)
+import face_recognition
+from PIL import Image, ImageDraw
 
-# import cv2
-# import face_recognition
+def load_and_encode_image(image_path):
+    image = face_recognition.load_image_file(image_path)
+    face_encoding = face_recognition.face_encodings(image)
+    if face_encoding:
+        return face_encoding[0]
+    return None
 
-# # Load the images of the two faces to compare
-# image1 = face_recognition.load_image_file(".\\1_20_FET_BCS_139.png")
-# image2 = face_recognition.load_image_file(".\\1_20_FET_BCS_139.png")
+def compare_faces(image_path1, image_path2):
+    # Load and encode faces
+    face_encoding1 = load_and_encode_image(image_path1)
+    face_encoding2 = load_and_encode_image(image_path2)
 
-# # Get the face encodings of the two images
-# face_encoding1 = face_recognition.face_encodings(image1)[0]
-# face_encoding2 = face_recognition.face_encodings(image2)[0]
+    if face_encoding1 is None or face_encoding2 is None:
+        return False  # Unable to find faces in one or both images
 
-# # Compare the face encodings using the compare_faces method
-# results = face_recognition.compare_faces([face_encoding1], face_encoding2)
+    # Compare faces
+    results = face_recognition.compare_faces([face_encoding1], face_encoding2)
+    return results[0]
 
-# # Print the results
-# if results[0] == True:
-#     print("The two faces are the same person")
-# else:
-#     print("The two faces are not the same person")
+def draw_rectangle_on_face(image_path, face_location):
+    image = face_recognition.load_image_file(image_path)
+    pil_image = Image.fromarray(image)
+    draw = ImageDraw.Draw(pil_image)
+
+    top, right, bottom, left = face_location
+    draw.rectangle([left, top, right, bottom], outline="red", width=2)
+    pil_image.show()
+
+# Example usage
+image_path1 = r'Student_images\1_20_FET_BCS_139.png'
+image_path2 = r'Student_images\temp.png'
+
+are_same_person = compare_faces(image_path1, image_path2)
+
+if are_same_person:
+    print("The two photos are of the same person.")
+else:
+    print("The two photos are of different people.")
+

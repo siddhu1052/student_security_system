@@ -1,43 +1,43 @@
 import cv2
-import scipy.misc as sp
-# from scipy.misc import toimage, imsave
+from pyzbar import pyzbar
+import cv2
 import matplotlib.pyplot as plt
-import numpy as np
-# img=cv2.imread(".\\Student_images\\pxfuel.jpg")
 
-# printing image in new window
-# while True :
-#     cv2.imshow('result',img)
-#     if cv2.waitKey(2)==27 :
-# 	    break
+cap = cv2.VideoCapture(0)
 
-# cv2.destroyAllWindows()
-haar_data = cv2.CascadeClassifier(".\data1.xml")
+def compare_faces(img1):
+    {
+        
 
-# find face using haar cascade data
-# while True :
-#     faces=haar_data.detectMultiScale(img)
-#     for x,y,w,h in faces :
-# 	    cv2.rectangle(img, (x,y), (x+w,y+h), (10,5,2), 5)
-#     cv2.imshow('result',img)
-#     if cv2.waitKey(2)==27 :
-# 	    break
-# cv2.destroyAllWindows()
+    }
+    return True
+    
 
-new_roll_number="1_20_FET_BCS_139"
-final_path=".//Student_images//"+new_roll_number+".png"
-
-capture= cv2.VideoCapture(0,cv2.CAP_DSHOW)
 while True:
-    face,img=capture.read();
-    faces=haar_data.detectMultiScale(img)
-    for x,y,w,h in faces :
-        cv2.rectangle(img, (x,y), (x+w,y+h), (225,0,225), 2)
-        face=img[y:y+h,x:x+w,:]
-        # face=cv2.resize(face,(50,50))
-        # print(len(data))
-    cv2.imshow('result',img)
-    if cv2.waitKey(2)==32 :
-        cv2.imwrite(final_path,face)
-        break;
+    ret, frame = cap.read()
+    barcodes = pyzbar.decode(frame)
+    for barcode in barcodes:
+        x, y , w, h = barcode.rect
+        data = barcode.data.decode('utf-8')
+        cv2.rectangle(frame, (x, y),(x+w, y+h), (10,5,2), 2)
+        path=str(data)
+        path=path.replace("/","_")
+        extension=".png";
+        b="Student_images\\"
+        path=b+path+extension
+        print(data)
+        print(path);
+        img = cv2.imread(path);
+        plt.imshow(img)
+        while True :
+            cv2.imshow('result',img)
+            if cv2.waitKey(2)==27 :
+             break
+        
+        
+    cv2.imshow("Barcode Scanner", frame)
+    if cv2.waitKey(1)==27:
+        break
+cap.release()
+
 cv2.destroyAllWindows()

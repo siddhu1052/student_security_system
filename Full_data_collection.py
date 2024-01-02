@@ -85,22 +85,36 @@ with open('Student Details.csv',"a", newline="") as file:
 Siddharth Singh
 FET
 siddhussingh@gmail.com
-siddahrthparent@gmail.com
+siddhussingh@gmail.com
 siddharthmentor@gmail.com
 
 1/20/FET/BCS/133
 Varun Kapasia
 FET
 varunkapasia51@gmail.com
-varunkeparent@gmail.cow
+varunkapasia8010@gmail.com
 varunmentor@gmail.com
 
 1/20/FET/BCS/142
 Deepanshu Choudhary
 FET
-ppkkcc22@gmail.com
-deepanshukepapa@gmail.com
-deepanshumentor@gmail.com
+ppkkcc2@gmail.com
+ppkkcc2@gmail.com
+deepanshuofficial4@gmail.com
 
+
+1/20/FET/BCS/141
+Tushar Saini
+FET
+tusharto0511@gmail.com
+arcsuper16@gmail.com
+boy298011@gmail.com
+
+1/20/FET/BCS/202
+Aman Negi
+FET
+anegi9643@gmail.com
+negia9848@gmail.com
+boy298011@gmail.com
 
 '''
